@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 __title__ = "Samples: FilteredElementCollector"
+__helpurl__ = 'https://ko-fi.com/s/14b0b8e31c'
 __doc__ = """This script is from YouTube Tutorial about FilteredElementCollector
 You will learn how to use this class to get elements from your project. 
 _____________________________________________________________________
-You can support my channel on:
-www.patreon.com/ErikFrits"""
+Check out my E-Book on FilteredElementCollector and Filters on Ko_Fi page."""
 # ╦╔╦╗╔═╗╔═╗╦═╗╔╦╗╔═╗
 # ║║║║╠═╝║ ║╠╦╝ ║ ╚═╗
 # ╩╩ ╩╩  ╚═╝╩╚═ ╩ ╚═╝ IMPORTS
@@ -59,4 +59,3 @@ my_elements = FilteredElementCollector(doc).WherePasses(custom_filter).WhereElem
 
 # WORKSET
 all_worksets = FilteredWorksetCollector(doc).OfKind(WorksetKind.UserWorkset).ToWorksets()
-
