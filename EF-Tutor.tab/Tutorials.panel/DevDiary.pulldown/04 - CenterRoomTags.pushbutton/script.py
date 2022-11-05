@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__   = "Center Room Tags"
+__title__   = "04 - Center Room Tags"
 __author__  = "Erik Frits"
 __version__ = "Version 1.0"
 __doc__ = """Version = 1.0

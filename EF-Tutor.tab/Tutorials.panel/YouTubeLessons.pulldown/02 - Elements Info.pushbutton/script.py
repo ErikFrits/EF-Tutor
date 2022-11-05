@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__ = "Element Information"
+__title__ = "02 - Element Information"
 __doc__ = """This is a simple tool to pick an element and 
 print out some simple information about it. 
 It's part of my YouTube RevitAPI Tutorial.

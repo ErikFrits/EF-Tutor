@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__ = "Samples: FilteredElementCollector"
+__title__ = "04 - Samples: FilteredElementCollector"
 __helpurl__ = 'https://ko-fi.com/s/14b0b8e31c'
 __doc__ = """This script is from YouTube Tutorial about FilteredElementCollector
 You will learn how to use this class to get elements from your project. 

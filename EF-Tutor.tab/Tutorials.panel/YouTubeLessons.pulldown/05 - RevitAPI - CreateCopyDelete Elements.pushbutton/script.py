@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__   = "Create/Delete/Copy Elements"
+__title__   = "05 - Create/Delete/Copy Elements"
 __author__  = "Erik Frits"
 __version__ = "Version 1.0"
 __doc__ = """Version = 1.0
@@ -247,3 +247,85 @@ with Transaction(doc,__title__) as t:
 
     t.Commit()
 
+
+
+
+
+#⬇ IMPORTS
+from Autodesk.Revit.DB import *
+
+
+
+#📦 VARIABLES
+doc          = __revit__.ActiveUIDocument.Document
+active_view  = doc.ActiveView
+active_level = doc.ActiveView.GenLevel
+
+#🎴 ALL VIEW TYPES
+view_types = FilteredElementCollector(doc).OfClass(ViewFamilyType).ToElements()
+
+#🔎 FILTER CERTAIN VIEW TYPES
+view_types_plans      = [vt for vt in view_types if vt.ViewFamily == ViewFamily.FloorPlan]
+view_types_sections   = [vt for vt in view_types if vt.ViewFamily == ViewFamily.Section]
+view_types_3D         = [vt for vt in view_types if vt.ViewFamily == ViewFamily.ThreeDimensional]
+view_types_legends    = [vt for vt in view_types if vt.ViewFamily == ViewFamily.Legend]
+view_types_drafting   = [vt for vt in view_types if vt.ViewFamily == ViewFamily.Drafting]
+view_types_elevations = [vt for vt in view_types if vt.ViewFamily == ViewFamily.Elevation]
+view_types_ceil_views = [vt for vt in view_types if vt.ViewFamily == ViewFamily.CeilingPlan]
+view_types_structural = [vt for vt in view_types if vt.ViewFamily == ViewFamily.StructuralPlan]
+view_types_area       = [vt for vt in view_types if vt.ViewFamily == ViewFamily.AreaPlan]
+view_types_sheet      = [vt for vt in view_types if vt.ViewFamily == ViewFamily.Sheet]
+
+
+
+
+def create_element_section(curve, origin, H=5,W=5,D=5, offset =0):
+    #type:(Curve, XYZ, float,float,float,float) -> ViewSection
+    """This function will generate a ViewSection with a special crop.
+    :param curve:   Curve for taking vector of orientation of the section.
+    :param origin:  XYZ Point from where all dimensions will be taken
+    :param H:       Height
+    :param W:       Width
+    :param D:       Depth
+    :param offset:  Offset from H,W,D to make a little more space
+    :return:        generated ViewSection"""
+    Thanks_to = """Thanks to martin.marek for his Snippet. It saved me a lot of time!
+    https://forum.dynamobim.com/t/create-section-view-of-the-wall-by-python/44986/6"""
+
+    pt_start = curve.GetEndPoint(0)
+    pt_end   = curve.GetEndPoint(1)
+    vector   = pt_end - pt_start
+
+
+    # SECTION - DIRECTION
+    fc = -1
+    if pt_start.X > pt_end.X or (pt_start.X == pt_end.X and pt_start.Y < pt_end.Y):
+        fc = 1
+
+    # SECTION - ORIENTATION
+    curvedir = fc * vector.Normalize()
+
+    t        = Transform.Identity
+    t.Origin = origin
+    t.BasisX = curvedir
+    t.BasisY = XYZ.BasisZ
+    t.BasisZ = curvedir.CrossProduct(XYZ.BasisZ)
+
+    # SECTION - CROPBOX
+    sectionBox           = BoundingBoxXYZ()
+    sectionBox.Transform = t                            #apply orientation
+    sectionBox.Min       = XYZ(W*-0.5 -offset, 0 -offset, D*-0.5 -offset)
+    sectionBox.Max       = XYZ(W* 0.5 +offset, H +offset, D* 0.5 +offset)
+
+    # SECTION - VIEWTYPE
+    view_types    = FilteredElementCollector(doc).OfClass(ViewFamilyType).ToElements()
+    SC_view_types = [v for v in view_types if v.ViewFamily == ViewFamily.Section]
+    SC_Type       = SC_view_types[0]
+
+    # CREATE SECTION
+    view_section = ViewSection.CreateSection(doc, SC_Type.Id, sectionBox)
+
+    # ACTIVATE CROP
+    view_section.get_Parameter(BuiltInParameter.VIEWER_CROP_REGION).Set(1)
+
+    return view_section

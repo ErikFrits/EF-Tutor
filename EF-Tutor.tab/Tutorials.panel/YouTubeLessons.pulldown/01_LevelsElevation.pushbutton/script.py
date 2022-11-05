@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__ = "Add Levels Elevation"                  # Name of the button displayed in Revit UI
+__title__ = "01 - Add Levels Elevation"                  # Name of the button displayed in Revit UI
 __doc__ = """Version = 1.0
 Date    = 20.04.2022
 _____________________________________________________________________
