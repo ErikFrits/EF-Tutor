@@ -39,28 +39,28 @@ app     = __revit__.Application                 # Represents the Autodesk Revit 
 # ║║║╠═╣║║║║
 # ╩ ╩╩ ╩╩╝╚╝ MAIN
 # ==================================================
-if __name__ == '__main__':
-    # Pick Main Element
-    with forms.WarningBar(title='Pick Main Element:'):
-        main_elem = revit.pick_element()
-    if not main_elem:
-        forms.alert("No element was selected. Please Try Again.", title=__title__, exitscript=True)
 
-    # Get Main GraphicsOverrides
-    graphics = doc.ActiveView.GetElementOverrides(main_elem.Id)
+# Pick Main Element
+with forms.WarningBar(title='Pick Main Element:'):
+    main_elem = revit.pick_element()
+if not main_elem:
+    forms.alert("No element was selected. Please Try Again.", title=__title__, exitscript=True)
 
-    # Loop keep selecting elements to match
-    with forms.WarningBar(title='Pick Elements to match Graphics:', handle_esc=True):
-        while True:
-            elem = None
-            try:
-                elem = revit.pick_element()
-            except:
-                break
-            if not elem: break
+# Get Main GraphicsOverrides
+graphics = doc.ActiveView.GetElementOverrides(main_elem.Id)
 
-            # Set GraphicsOverrides
-            t = Transaction(doc, __title__)
-            t.Start()
-            doc.ActiveView.SetElementOverrides(elem.Id, graphics)
-            t.Commit()
+# Loop keep selecting elements to match
+with forms.WarningBar(title='Pick Elements to match Graphics:', handle_esc=True):
+    while True:
+        elem = None
+        try:
+            elem = revit.pick_element()
+        except:
+            break
+        if not elem: break
+
+        # Set GraphicsOverrides
+        t = Transaction(doc, __title__)
+        t.Start()
+        doc.ActiveView.SetElementOverrides(elem.Id, graphics)
+        t.Commit()

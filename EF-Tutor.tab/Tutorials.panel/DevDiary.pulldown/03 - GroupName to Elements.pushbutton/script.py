@@ -25,7 +25,7 @@ uidoc   = __revit__.ActiveUIDocument
 app     = __revit__.Application
 
 OUTPUT_PARAM = 'GroupName'
-CATEGORIES = ['Walls', 'Floors', 'Doors']
+CATEGORIES = [BuiltInCategory.OST_Walls, BuiltInCategory.OST_Floors]
 
 # ╔╦╗╔═╗╦╔╗╔
 # ║║║╠═╣║║║║
@@ -40,9 +40,9 @@ with Transaction(doc, __doc__) as t:
     t.Start()
 
     # CLEAN PARAMETERS
-    all_walls = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElements()
+    all_walls  = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType().ToElements()
     all_floors = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Floors).WhereElementIsNotElementType().ToElements()
-    all_doors = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Doors).WhereElementIsNotElementType().ToElements()
+    all_doors  = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Doors).WhereElementIsNotElementType().ToElements()
     clean_elements = list(all_walls) + list(all_floors) + list(all_doors)
 
     for el in clean_elements:

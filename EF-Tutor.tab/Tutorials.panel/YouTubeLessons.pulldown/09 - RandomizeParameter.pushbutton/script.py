@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__ = "Randomize Parameter"
+__title__ = "09 - Randomize Parameter (+ Custom UI)"
 __doc__ = """Date    = 22.04.2023
 Randomize Parameter Values for specific Families
 _____________________________________________________________________
@@ -105,6 +105,7 @@ def random_step(_min, _max, _step):
 # 🔷 Bonus: Custom UI
 from rpw.ui.forms import (FlexForm, Label, ComboBox, TextBox, TextBox,Separator, Button, CheckBox)
 
+# Define UI Components
 components = [Label("Element's Type Name:"), TextBox('type_name', Text="Vertical Blade"),
               Label('Parameter Name:'), TextBox('param_name', Text="Tiefe"),
               Separator(),
@@ -114,10 +115,14 @@ components = [Label("Element's Type Name:"), TextBox('type_name', Text="Vertical
               Separator(),
               Button('Select')]
 
+# Create UI Form + Show it
 form = FlexForm(__title__, components)
 form.show()
 
+# Get All Values (as dict)
 values = form.values
+
+# Read Values
 type_name   = values['type_name']
 param_name  = values['param_name']
 _min        = float(values['_min'])

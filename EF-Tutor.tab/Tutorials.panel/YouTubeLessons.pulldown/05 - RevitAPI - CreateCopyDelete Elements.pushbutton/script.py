@@ -47,7 +47,7 @@ with Transaction(doc,__title__) as t:
     #  ║ ║╣ ╔╩╦╝ ║
     #  ╩ ╚═╝╩ ╚═ ╩ TEXT
     # ==================================================
-    # # ARGUMENTS
+    # ARGUMENTS
     # text_type_id = FilteredElementCollector(doc).OfClass(TextNoteType).FirstElementId()
     # pt           = XYZ(0,0,0)
     # text         = 'Hello BIM World!'
@@ -84,12 +84,12 @@ with Transaction(doc,__title__) as t:
     # ║║║╠═╣║  ║  ╚═╗
     # ╚╩╝╩ ╩╩═╝╩═╝╚═╝ WALLS
     #==================================================
-    # ARGUMENTS
+    # # ARGUMENTS
     # pt_start = XYZ(30,0,0)
     # pt_end   = XYZ(30,5,0)
     # curve    = Line.CreateBound(pt_start, pt_end)
     #
-    # CREATE A WALL
+    # # CREATE A WALL
     # wall = Wall.Create(doc, curve, active_level.Id, False)
 
     # ╦ ╦╦╔╗╔╔╦╗╔═╗╦ ╦╔═╗
