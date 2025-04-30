@@ -1,0 +1,53 @@
+<Window Title="EF-First WPF Form"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="Auto" Width="300" MinHeight="150"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        SizeToContent="Height">
+
+    <!--Stack Panel for all elements-->
+    <StackPanel Margin="10" >
+
+        <!--ListBox of Random Views-->
+        <StackPanel Margin="5">
+            <!--ListBox Label-->
+            <TextBlock Text="Select Views:" FontWeight="Bold" Margin="0,0,0,5"/>
+
+            <!--Search Box-->
+            <DockPanel Margin="5">
+                <TextBlock Text="🔎" Margin="0,0,5,0" />
+                <TextBox x:Name="UI_search" TextChanged="UIe_search_text_changed"/>
+            </DockPanel>
+
+            <ListBox x:Name="UI_listbox" Height="300" >
+                <!--ListBox Item with a CheckBox-->
+                <ListBoxItem>
+                    <DockPanel>
+                        <CheckBox Content="View - A"/>
+                    </DockPanel>
+
+                </ListBoxItem>
+
+                <ListBoxItem>
+                    <CheckBox Content="View - B" />
+                </ListBoxItem>
+
+                <ListBoxItem>
+                    <CheckBox Content="View - C"/>
+                </ListBoxItem>
+
+            </ListBox>
+
+        </StackPanel>
+
+        <!--Separator-->
+        <Separator Margin="5,5,5,12"/>
+
+        <!--Submit Button-->
+        <Button Content="Submit!" 
+                Width="100" 
+                Click="UIe_btn_run" />
+
+    </StackPanel>
+
+</Window>
